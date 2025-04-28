@@ -79,49 +79,83 @@ Python HTTP server (for serving frontend)
 
 # Project Structure
 job-board/
+
 ├── backend/
+
 │   ├── controllers/
+
 │   │   ├── authController.js       # Authentication logic
+
 │   │   ├── jobController.js        # Job posting and retrieval
+
 │   │   ├── applicationController.js # Job application handling
+
 │   │   ├── profileController.js    # Profile and resume management
+
 │   ├── models/
+
 │   │   ├── User.js                # User schema
+
 │   │   ├── Job.js                 # Job schema
+
 │   │   ├── Application.js         # Application schema
+
 │   │   ├── Profile.js             # Profile schema
+
 │   ├── middleware/
+
 │   │   ├── authMiddleware.js      # JWT authentication middleware
+
 │   ├── routes/
+
 │   │   ├── authRoutes.js          # Authentication endpoints
+
 │   │   ├── jobRoutes.js           # Job endpoints
+
 │   │   ├── applicationRoutes.js   # Application endpoints
+
 │   │   ├── profileRoutes.js       # Profile and resume endpoints
+
 │   ├── .env                       # Environment variables (not in Git)
+
 │   ├── server.js                 # Main server file
+
 │   ├── package.json              # Dependencies and scripts
+
 │   ├── package-lock.json         # Dependency lock file
+
 ├── frontend/
+
 │   ├── index.html                # Single-page application
+
 ├── README.md                     # Project documentation
+
 
 I had more view on it I will continue implementing connect with me if you want to know 
 
 # Prerequisites
 
 Node.js: v20.14.0 or higher
+
 MongoDB Atlas: Free tier account for cloud database
+
 Postman: For testing API endpoints
+
 Web3Forms: Account for contact form integration
+
 Git: For version control
+
 Python: For serving the frontend (optional)
+
 
 # Setup Instructions
 1. Clone the Repository
+2. 
 git clone https://github.com/<your-username>/job-board.git
+
 cd job-board
 
-2. Set Up the Backend
+4. Set Up the Backend
 
 Navigate to the backend directory:cd backend
 
@@ -130,46 +164,43 @@ Install dependencies:npm install
 
 
 Create a .env file in the backend/ directory with the following:MONGO_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/jobboard?retryWrites=true&w=majority
+
 JWT_SECRET=your_jwt_secret_key
+
 PORT=5000
 
-
 Replace <username>, <password>, and cluster0.mongodb.net with your MongoDB Atlas credentials.
-Generate a secure JWT_SECRET (e.g., a random 32-character string).
 
+Generate a secure JWT_SECRET (e.g., a random 32-character string).
 
 Start the backend:npm run dev
 
-
 The server should run on http://localhost:5000 and connect to MongoDB Atlas.
-
-
 
 3. Set Up the Frontend
 
 Navigate to the frontend directory:cd frontend
 
-
 Serve the frontend using Python’s HTTP server:python -m http.server 8000
 
-
 Open http://localhost:8000 in a browser.
-
-
 
 4. Configure Web3Forms
 
 Sign up at Web3Forms.
-Get your access key and update the contact form in index.html:<input type="hidden" name="access_key" value="your_web3forms_access_key">
 
+Get your access key and update the contact form in index.html:<input type="hidden" name="access_key" value="your_web3forms_access_key">
 
 Test the contact form to ensure submissions appear in your Web3Forms dashboard.
 
 5. Test the Application
 
 Use Postman to test backend endpoints (see API Endpoints).
+
 Register as a job seeker and employer to test role-based features.
+
 Verify MongoDB Atlas for data storage (users, jobs, applications, profiles, uploads.files, uploads.chunks).
+
 
 # Usage
 For Job Seekers
@@ -225,41 +256,53 @@ DELETE /api/jobs/:id: Delete a job (employer only).
 
 # Applications:
 POST /api/applications/:jobId: Apply to a job (job seeker only).
+
 GET /api/applications: List user applications (job seeker only).
 
 
 # Profile:
 POST /api/profile: Create/update profile (job seeker/employer).
-GET /api/profile: Get user profile.
-POST /api/profile/resume: Upload resume (PDF, max 5MB).
-GET /api/profile/resume: Download resume.
 
+GET /api/profile: Get user profile.
+
+POST /api/profile/resume: Upload resume (PDF, max 5MB).
+
+GET /api/profile/resume: Download resume.
 
 
 # Testing
 
 Backend: Use Postman to test API endpoints. Example:
+
 Register: POST http://localhost:5000/api/auth/register with {"name": "Test User", "email": "test@example.com", "password": "Password123!", "role": "jobseeker"}.
+
 Login: POST http://localhost:5000/api/auth/login to get a token.
 
 
 Frontend: Test all features (register, login, job posting, applications, profile, resume, contact form) in the browser.
+
 Database: Verify data in MongoDB Atlas (jobboard database).
 
 # Troubleshooting
 
 Backend Errors:
+
 Check terminal logs for MongoDB connection or JWT issues.
+
 Ensure .env variables are correct.
 
 
 Frontend Errors:
+
 Open browser console (F12 → Console) for JavaScript errors.
+
 Verify API requests (F12 → Network) return 200 OK.
 
 
 Resume Upload:
+
 Ensure PDFs are < 5MB.
+
 Check uploads.files and uploads.chunks in MongoDB.
 
 
@@ -268,23 +311,32 @@ Confirm Web3Forms access key is valid.
 Check submissions in the Web3Forms dashboard.
 
 
-
 # Future Enhancements
 
 Profile Picture Upload: Allow users to upload profile images.
+
 Job Categories and Filters: Add job categories (e.g., Technology, Finance) and filters (e.g., job type, salary).
+
 Candidate Search: Enable employers to search job seekers by skills or location.
+
 Notifications: Add real-time alerts for new jobs or application updates.
+
 Premium Features: Implement subscriptions for enhanced features (e.g., unlimited job postings).
+
 Deployment: Host on Render (backend) and Netlify (frontend).
+
 
 Contributing
 Contributions are welcome! To contribute please contact me if had ideas I will help figure it out:
 
 Fork the repository.
+
 Create a feature branch (git checkout -b feature/new-feature).
+
 Commit changes (git commit -m "Add new feature").
+
 Push to the branch (git push origin feature/new-feature).
+
 Open a pull request.
 
 License
@@ -292,8 +344,11 @@ This project is licensed under the MIT License.
 
 Contact
 For questions or feedback, use the contact form in the application or email kgunakatakam614@gmail.com . You can also open an issue on GitHub.
+
 Linkedin : https://www.linkedin.com/in/guna-surya-kumar-katakam-0b4358275
+
 Portfolio : https://codepen.io/KATAKAM-GUNA-SURYA-KUMAR/full/raBEBaO
+
 Leetcode : https://leetcode.com/u/22PA5A5704/
 
 Built with 🖤 by Guna Surya Kumar Katakam
