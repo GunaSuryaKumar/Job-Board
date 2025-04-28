@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Portal</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome for contact section icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    .contact {
+      padding: 50px 0;
+      background: #f4f4f4;
+    }
+    .contact .max-width {
+      max-width: 1300px;
+      margin: auto;
+      padding: 0 20px;
+    }
+    .contact .title {
+      text-align: center;
+      margin-bottom: 60px;
+      font-size: 2rem;
+      font-weight: 600;
+      color: #333;
+    }
+    .contact .contact-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    .contact .column {
+      width: calc(50% - 30px);
+    }
+    .contact .column.left .text {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .contact .column.left p {
+      text-align: justify;
+    }
+    .contact .column.left .icons {
+      margin: 10px 0;
+    }
+    .contact .row {
+      display: flex;
+      height: 65px;
+      align-items: center;
+    }
+    .contact .row .info {
+      margin-left: 30px;
+    }
+    .contact .row i {
+      font-size: 25px;
+      color: #1e40af;
+    }
+    .contact .row .info .head {
+      font-weight: 600;
+    }
+    .contact .row .info .sub-title {
+      color: #333;
+    }
+    .contact .column.right .text {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .contact .column.right .fields {
+      display: flex;
+    }
+    .contact .column.right .field,
+    .contact .column.right .fields .field {
+      height: 45px;
+      width: 100%;
+      margin-bottom: 15px;
+    }
+    .contact .column.right .textarea {
+      height: 80px;
+    }
+    .contact .column.right .field input,
+    .contact .column.right .textarea textarea {
+      height: 100%;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 0 15px;
+      font-size: 16px;
+      font-family: 'Poppins', sans-serif;
+      outline: none;
+    }
+    .contact .column.right .textarea textarea {
+      padding-top: 10px;
+      resize: none;
+    }
+    .contact .column.right .button-area {
+      display: flex;
+      align-items: center;
+    }
+    .contact .column.right .button-area button {
+      color: #fff;
+      display: block;
+      width: 160px;
+      height: 45px;
+      outline: none;
+      font-size: 18px;
+      font-weight: 500;
+      border-radius: 6px;
+      cursor: pointer;
+      background: #1e40af;
+      border: none;
+      transition: all 0.3s ease;
+    }
+    .contact .column.right .button-area button:hover {
+      background: #1e3a8a;
+    }
+    @media (max-width: 947px) {
+      .contact .contact-content .column {
+        width: 100%;
+        margin-bottom: 35px;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+  <!-- Navigation Bar -->
+  <nav class="bg-blue-600 text-white p-4">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold">Job Portal</h1>
+      <div id="navLinks" class="space-x-4">
+        <button onclick="showSection('home')" class="hover:underline">Home</button>
+        <button onclick="showSection('login')" class="hover:underline">Login</button>
+        <button onclick="showSection('register')" class="hover:underline">Register</button>
+        <button onclick="showSection('jobs')" class="hover:underline">Jobs</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="container mx-auto p-4">
+    <!-- Home Section -->
+    <section id="home" class="section">
+      <h2 class="text-xl font-semibold mb-4">Welcome to the Job Portal</h2>
+      <p class="text-gray-700">Find your dream job or post job openings here.</p>
+    </section>
+
+    <!-- Login Section -->
+    <section id="login" class="section hidden">
+      <h2 class="text-xl font-semibold mb-4">Login</h2>
+      <form id="loginForm" class="max-w-md bg-white p-6 rounded-lg shadow-md">
+        <div class="mb-4">
+          <label for="loginEmail" class="block text-gray-700">Email</label>
+          <input
+            type="email"
+            id="loginEmail"
+            class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <label for="loginPassword" class="block text-gray-700">Password</label>
+          <input
+            type="password"
+            id="loginPassword"
+            class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+            required
+          />
+        </div>
+        <button
+          type="submit"
+          class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
+        >
+          Login
+        </button>
+        <p id="loginMessage" class="mt-4 text-center text-red-500 hidden"></p>
+      </form>
+    </section>
+
+    <!-- Register Section -->
+    <section id="register" class="section hidden">
+      <h2 class="text-xl font-semibold mb-4">Register</h2>
+      <form id="registerForm" class="max-w-md bg-white p-6 rounded-lg shadow-md">
+        <div class="mb-4">
+          <label for="registerName" class="block text-gray-700">Name</label>
+          <input
+            type="text"
+            id="registerName"
+            class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+            required
+          />
+          <p id="nameError" class="text-red-500 text-sm hidden"></p>
+        </div>
+        <div class="mb-4">
+          <label for="registerEmail" class="block text-gray-700">Email</label>
+          <input
+            type="email"
+            id="registerEmail"
+            class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+            required
+          />
+          <p id="emailError" class="text-red-500 text-sm hidden"></p>
+        </div>
+        <div class="mb-4">
+          <label for="registerPassword" class="block text-gray-700">Password</label>
+          <input
+            type="password"
+            id="registerPassword"
+            class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+            required
+          />
+          <p id="passwordError" class="text-red-500 text-sm hidden"></p>
+        </div>
+        <div class="mb-4">
+          <label for="registerRole" class="block text-gray-700">Role</label>
+          <select
+            id="registerRole"
+            class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+            required
+          >
+            <option value="jobseeker">Job Seeker</option>
+            <option value="employer">Employer</option>
+          </select>
+        </div>
+        <button
+          type="submit"
+          class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
+        >
+          Register
+        </button>
+        <p id="registerMessage" class="mt-4 text-center text-red-500 hidden"></p>
+      </form>
+    </section>
+
+    <!-- Jobs Section -->
+    <section id="jobs" class="section hidden">
+      <h2 class="text-xl font-semibold mb-4">Job Listings</h2>
+      <!-- Search Bar -->
+      <div class="mb-4">
+        <input
+          type="text"
+          id="jobSearch"
+          placeholder="Search by location, company, or title..."
+          class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+        />
+      </div>
+      <!-- Employer: Create Job Form -->
+      <div id="createJobForm" class="max-w-md bg-white p-6 rounded-lg shadow-md mb-6 hidden">
+        <h3 class="text-lg font-semibold mb-4">Post a New Job</h3>
+        <form id="jobForm">
+          <div class="mb-4">
+            <label for="jobTitle" class="block text-gray-700">Job Title</label>
+            <input
+              type="text"
+              id="jobTitle"
+              class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+              required
+            />
+          </div>
+          <div class="mb-4">
+            <label for="jobCompany" class="block text-gray-700">Company</label>
+            <input
+              type="text"
+              id="jobCompany"
+              class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+              required
+            />
+          </div>
+          <div class="mb-4">
+            <label for="jobLocation" class="block text-gray-700">Location</label>
+            <input
+              type="text"
+              id="jobLocation"
+              class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+              required
+            />
+          </div>
+          <div class="mb-4">
+            <label for="jobDescription" class="block text-gray-700">Description</label>
+            <textarea
+              id="jobDescription"
+              class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+              required
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
+          >
+            Post Job
+          </button>
+        </form>
+        <p id="jobMessage" class="mt-4 text-center text-red-500 hidden"></p>
+      </div>
+      <!-- Job Listings -->
+      <div id="jobListings" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+      <!-- Pagination -->
+      <div id="pagination" class="mt-4 flex justify-center space-x-2"></div>
+    </section>
+
+    <!-- My Applications Section (Job Seekers) -->
+    <section id="myApplications" class="section hidden">
+      <h2 class="text-xl font-semibold mb-4">My Applications</h2>
+      <div id="applicationListings" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </section>
+
+    <!-- My Posted Jobs Section (Employers) -->
+    <section id="myPostedJobs" class="section hidden">
+      <h2 class="text-xl font-semibold mb-4">My Posted Jobs</h2>
+      <div id="postedJobListings" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </section>
+
+    <!-- Profile Section -->
+    <section id="profile" class="section hidden">
+      <h2 class="text-xl font-semibold mb-4">My Profile</h2>
+      <div id="profileContent" class="bg-white p-6 rounded-lg shadow-md">
+        <!-- Profile display and form will be dynamically inserted here -->
+      </div>
+      <!-- Contact Section -->
+      <section class="contact" id="contact">
+        <div class="max-width">
+          <h2 class="title">Contact Me</h2>
+          <div class="contact-content">
+            <div class="column left">
+              <div class="text">Get in Touch</div>
+              <p>If you are interested in working together? Please fill out the form aside with some info about your project and I will get back to you as soon as I can. Please allow a couple days for me to respond.</p>
+              <div class="icons" id="contactInfo">
+                <div class="row">
+                  <i class="fas fa-user"></i>
+                  <div class="info">
+                    <div class="head">Name</div>
+                    <div class="sub-title" id="contactName">Loading...</div>
+                  </div>
+                </div>
+                <div class="row">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <div class="info">
+                    <div class="head">Address</div>
+                    <div class="sub-title" id="contactPlace">Loading...</div>
+                  </div>
+                </div>
+                <div class="row">
+                  <i class="fas fa-envelope"></i>
+                  <div class="info">
+                    <div class="head">Email</div>
+                    <div class="sub-title" id="contactEmail">Loading...</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="column right">
+              <div class="text">Message Me</div>
+              <form action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="464aa9db-2745-45c1-ae3c-03f253139b29">
+                <div class="fields">
+                  <div class="field name">
+                    <input type="text" name="name" placeholder="Name" required>
+                  </div>
+                  <div class="field email">
+                    <input type="email" name="email" placeholder="Email" required>
+                  </div>
+                </div>
+                <div class="field">
+                  <input type="text" name="subject" placeholder="Subject" required>
+                </div>
+                <div class="field textarea">
+                  <textarea name="message" cols="30" rows="10" placeholder="Message.." required></textarea>
+                </div>
+                <div class="button-area">
+                  <button type="submit">Send message</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    // Function to show/hide sections
+    function showSection(sectionId) {
+      document.querySelectorAll('.section').forEach(section => {
+        section.classList.add('hidden');
+      });
+      document.getElementById(sectionId).classList.remove('hidden');
+
+      // Load profile data when profile section is shown
+      if (sectionId === 'profile') {
+        loadProfile();
+      } else if (sectionId === 'jobs') {
+        fetchJobs();
+      } else if (sectionId === 'myApplications') {
+        fetchApplications();
+      } else if (sectionId === 'myPostedJobs') {
+        fetchPostedJobs();
+      }
+    }
+
+    // Update navigation based on user status
+    function updateNav() {
+      const user = JSON.parse(localStorage.getItem('user'));
+      const navLinks = document.getElementById('navLinks');
+      if (user) {
+        navLinks.innerHTML = `
+          <button onclick="showSection('home')" class="hover:underline">Home</button>
+          <button onclick="showSection('jobs')" class="hover:underline">Jobs</button>
+          ${user.role === 'jobseeker' ? `<button onclick="showSection('myApplications')" class="hover:underline">My Applications</button>` : ''}
+          ${user.role === 'employer' ? `<button onclick="showSection('myPostedJobs')" class="hover:underline">My Posted Jobs</button>` : ''}
+          <button onclick="showSection('profile')" class="hover:underline">Profile</button>
+          <button onclick="logout()" class="hover:underline">Logout</button>
+        `;
+        if (user.role === 'employer') {
+          document.getElementById('createJobForm').classList.remove('hidden');
+        }
+      } else {
+        navLinks.innerHTML = `
+          <button onclick="showSection('home')" class="hover:underline">Home</button>
+          <button onclick="showSection('login')" class="hover:underline">Login</button>
+          <button onclick="showSection('register')" class="hover:underline">Register</button>
+          <button onclick="showSection('jobs')" class="hover:underline">Jobs</button>
+        `;
+        document.getElementById('createJobForm').classList.add('hidden');
+      }
+    }
+
+    // Logout function
+    function logout() {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      updateNav();
+      showSection('home');
+    }
+
+    // Form validation for registration
+    function validateRegisterForm(name, email, password) {
+      let isValid = true;
+      const nameError = document.getElementById('nameError');
+      const emailError = document.getElementById('emailError');
+      const passwordError = document.getElementById('passwordError');
+
+      // Reset error messages
+      nameError.classList.add('hidden');
+      emailError.classList.add('hidden');
+      passwordError.classList.add('hidden');
+
+      // Name validation
+      if (name.length < 2) {
+        nameError.textContent = 'Name must be at least 2 characters long';
+        nameError.classList.remove('hidden');
+        isValid = false;
+      }
+
+      // Email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        emailError.textContent = 'Please enter a valid email address';
+        emailError.classList.remove('hidden');
+        isValid = false;
+      }
+
+      // Password validation
+      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      if (!passwordRegex.test(password)) {
+        passwordError.textContent = 'Password must be at least 8 characters, include uppercase, lowercase, number, and special character';
+        passwordError.classList.remove('hidden');
+        isValid = false;
+      }
+
+      return isValid;
+    }
+
+    // Handle Login Form Submission
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      const messageEl = document.getElementById('loginMessage');
+
+      try {
+        const response = await fetch('http://localhost:5000/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password }),
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('user', JSON.stringify(data.user));
+          messageEl.classList.remove('text-red-500', 'hidden');
+          messageEl.classList.add('text-green-500');
+          messageEl.textContent = 'Login successful! Redirecting to jobs...';
+          updateNav();
+          setTimeout(() => showSection('jobs'), 2000);
+        } else {
+          messageEl.classList.remove('hidden');
+          messageEl.textContent = data.message || 'Login failed';
+        }
+      } catch (error) {
+        messageEl.classList.remove('hidden');
+        messageEl.textContent = 'Error: Unable to connect to server';
+      }
+    });
+
+    // Handle Register Form Submission
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('registerName').value;
+      const email = document.getElementById('registerEmail').value;
+      const password = document.getElementById('registerPassword').value;
+      const role = document.getElementById('registerRole').value;
+      const messageEl = document.getElementById('registerMessage');
+
+      if (!validateRegisterForm(name, email, password)) {
+        return;
+      }
+
+      try {
+        const response = await fetch('http://localhost:5000/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, password, role }),
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+          messageEl.classList.remove('text-red-500', 'hidden');
+          messageEl.classList.add('text-green-500');
+          messageEl.textContent = 'Registration successful! Please login.';
+          setTimeout(() => showSection('login'), 2000);
+        } else {
+          messageEl.classList.remove('hidden');
+          messageEl.textContent = data.message || 'Registration failed';
+        }
+      } catch (error) {
+        messageEl.classList.remove('hidden');
+        messageEl.textContent = 'Error: Unable to connect to server';
+      }
+    });
+
+    // Fetch and display jobs with pagination
+    async function fetchJobs(search = '', page = 1, limit = 10) {
+      const jobListings = document.getElementById('jobListings');
+      const pagination = document.getElementById('pagination');
+      jobListings.innerHTML = '';
+      pagination.innerHTML = '';
+      try {
+        const url = search
+          ? `http://localhost:5000/api/jobs?search=${encodeURIComponent(search)}&page=${page}&limit=${limit}`
+          : `http://localhost:5000/api/jobs?page=${page}&limit=${limit}`;
+        const response = await fetch(url, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+        const data = await response.json();
+        if (response.ok) {
+          data.jobs.forEach(job => {
+            const jobCard = document.createElement('div');
+            jobCard.className = 'bg-white p-4 rounded-lg shadow-md';
+            jobCard.innerHTML = `
+              <h3 class="text-lg font-semibold">${job.title}</h3>
+              <p class="text-gray-600">Company: ${job.company}</p>
+              <p class="text-gray-600">Location: ${job.location}</p>
+              <p class="text-gray-600">Description: ${job.description}</p>
+              <div class="mt-2">
+                ${localStorage.getItem('user') && JSON.parse(localStorage.getItem('user')).role === 'jobseeker' ? 
+                  `<button onclick="applyToJob('${job._id}')" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Apply</button>` : ''}
+                ${localStorage.getItem('user') && JSON.parse(localStorage.getItem('user')).role === 'employer' ? 
+                  `<button onclick="showUpdateJobForm('${job._id}', '${job.title}', '${job.company}', '${job.location}', '${job.description}')" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Edit</button>` : ''}
+              </div>
+            `;
+            jobListings.appendChild(jobCard);
+          });
+
+          // Pagination controls
+          const { totalPages, currentPage } = data;
+          if (totalPages > 1) {
+            for (let i = 1; i <= totalPages; i++) {
+              const pageButton = document.createElement('button');
+              pageButton.textContent = i;
+              pageButton.className = `px-4 py-2 rounded ${i === currentPage ? 'bg-blue-600 text-white' : 'bg-gray-200'}`;
+              pageButton.onclick = () => fetchJobs(search, i, limit);
+              pagination.appendChild(pageButton);
+            }
+          }
+        } else {
+          jobListings.innerHTML = '<p class="text-red-500">Failed to load jobs</p>';
+        }
+      } catch (error) {
+        jobListings.innerHTML = '<p class="text-red-500">Error: Unable to connect to server</p>';
+      }
+    }
+
+    // Search jobs
+    document.getElementById('jobSearch').addEventListener('input', (e) => {
+      fetchJobs(e.target.value);
+    });
+
+    // Create Job
+    document.getElementById('jobForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const title = document.getElementById('jobTitle').value;
+      const company = document.getElementById('jobCompany').value;
+      const location = document.getElementById('jobLocation').value;
+      const description = document.getElementById('jobDescription').value;
+      const messageEl = document.getElementById('jobMessage');
+
+      try {
+        const response = await fetch('http://localhost:5000/api/jobs', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          },
+          body: JSON.stringify({ title, company, location, description }),
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+          messageEl.classList.remove('text-red-500', 'hidden');
+          messageEl.classList.add('text-green-500');
+          messageEl.textContent = 'Job posted successfully!';
+          document.getElementById('jobForm').reset();
+          fetchJobs();
+        } else {
+          messageEl.classList.remove('hidden');
+          messageEl.textContent = data.message || 'Failed to post job';
+        }
+      } catch (error) {
+        messageEl.classList.remove('hidden');
+        messageEl.textContent = 'Error: Unable to connect to server';
+      }
+    });
+
+    // Show Update Job Form
+    function showUpdateJobForm(jobId, title, company, location, description) {
+      const jobForm = document.getElementById('jobForm');
+      jobForm.innerHTML = `
+        <div class="mb-4">
+          <label for="jobTitle" class="block text-gray-700">Job Title</label>
+          <input
+            type="text"
+            id="jobTitle"
+            value="${title}"
+            class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <label for="jobCompany" class="block text-gray-700">Company</label>
+          <input
+            type="text"
+            id="jobCompany"
+            value="${company}"
+            class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <label for="jobLocation" class="block text-gray-700">Location</label>
+          <input
+            type="text"
+            id="jobLocation"
+            value="${location}"
+            class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <label for="jobDescription" class="block text-gray-700">Description</label>
+          <textarea
+            id="jobDescription"
+            class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+            required
+          >${description}</textarea>
+        </div>
+        <button
+          type="submit"
+          class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
+        >
+          Update Job
+        </button>
+      `;
+      jobForm.onsubmit = async (e) => {
+        e.preventDefault();
+        const updatedTitle = document.getElementById('jobTitle').value;
+        const updatedCompany = document.getElementById('jobCompany').value;
+        const updatedLocation = document.getElementById('jobLocation').value;
+        const updatedDescription = document.getElementById('jobDescription').value;
+        const messageEl = document.getElementById('jobMessage');
+
+        try {
+          const response = await fetch(`http://localhost:5000/api/jobs/${jobId}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            },
+            body: JSON.stringify({
+              title: updatedTitle,
+              company: updatedCompany,
+              location: updatedLocation,
+              description: updatedDescription,
+            }),
+          });
+          const data = await response.json();
+          if (response.ok) {
+            messageEl.classList.remove('text-red-500', 'hidden');
+            messageEl.classList.add('text-green-500');
+            messageEl.textContent = 'Job updated successfully!';
+            jobForm.reset();
+            jobForm.innerHTML = `
+              <div class="mb-4">
+                <label for="jobTitle" class="block text-gray-700">Job Title</label>
+                <input
+                  type="text"
+                  id="jobTitle"
+                  class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  required
+                />
+              </div>
+              <div class="mb-4">
+                <label for="jobCompany" class="block text-gray-700">Company</label>
+                <input
+                  type="text"
+                  id="jobCompany"
+                  class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  required
+                />
+              </div>
+              <div class="mb-4">
+                <label for="jobLocation" class="block text-gray-700">Location</label>
+                <input
+                  type="text"
+                  id="jobLocation"
+                  class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  required
+                />
+              </div>
+              <div class="mb-4">
+                <label for="jobDescription" class="block text-gray-700">Description</label>
+                <textarea
+                  id="jobDescription"
+                  class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  required
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
+              >
+                Post Job
+              </button>
+            `;
+            fetchJobs();
+          } else {
+            messageEl.classList.remove('hidden');
+            messageEl.textContent = data.message || 'Failed to update job';
+          }
+        } catch (error) {
+          messageEl.classList.remove('hidden');
+          messageEl.textContent = 'Error: Unable to connect to server';
+        }
+      };
+    }
+
+    // Apply to Job
+    async function applyToJob(jobId) {
+      try {
+        const response = await fetch(`http://localhost:5000/api/applications/${jobId}`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+          alert('Application submitted successfully!');
+          fetchApplications();
+        } else {
+          alert(data.message || 'Failed to apply');
+        }
+      } catch (error) {
+        alert('Error: Unable to connect to server');
+      }
+    }
+
+    // Fetch and display user applications
+    async function fetchApplications() {
+      const applicationListings = document.getElementById('applicationListings');
+      applicationListings.innerHTML = '';
+      try {
+        const response = await fetch('http://localhost:5000/api/applications', {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+        const applications = await response.json();
+        if (response.ok) {
+          if (applications.length === 0) {
+            applicationListings.innerHTML = '<p class="text-gray-700">No applications found.</p>';
+            return;
+          }
+          applications.forEach(app => {
+            const appCard = document.createElement('div');
+            appCard.className = 'bg-white p-4 rounded-lg shadow-md';
+            appCard.innerHTML = `
+              <h3 class="text-lg font-semibold">${app.job.title}</h3>
+              <p class="text-gray-600">Company: ${app.job.company}</p>
+              <p class="text-gray-600">Location: ${app.job.location}</p>
+              <p class="text-gray-600">Description: ${app.job.description}</p>
+              <p class="text-gray-600">Applied At: ${new Date(app.appliedAt).toLocaleDateString()}</p>
+            `;
+            applicationListings.appendChild(appCard);
+          });
+        } else {
+          applicationListings.innerHTML = '<p class="text-red-500">Failed to load applications</p>';
+        }
+      } catch (error) {
+        applicationListings.innerHTML = '<p class="text-red-500">Error: Unable to connect to server</p>';
+      }
+    }
+
+    // Fetch and display employer posted jobs
+    async function fetchPostedJobs() {
+      const postedJobListings = document.getElementById('postedJobListings');
+      postedJobListings.innerHTML = '';
+      try {
+        const response = await fetch('http://localhost:5000/api/jobs/employer', {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+        const jobs = await response.json();
+        if (response.ok) {
+          if (jobs.length === 0) {
+            postedJobListings.innerHTML = '<p class="text-gray-700">No posted jobs found.</p>';
+            return;
+          }
+          jobs.forEach(job => {
+            const jobCard = document.createElement('div');
+            jobCard.className = 'bg-white p-4 rounded-lg shadow-md';
+            jobCard.innerHTML = `
+              <h3 class="text-lg font-semibold">${job.title}</h3>
+              <p class="text-gray-600">Company: ${job.company}</p>
+              <p class="text-gray-600">Location: ${job.location}</p>
+              <p class="text-gray-600">Description: ${job.description}</p>
+              <div class="mt-2">
+                <button onclick="showUpdateJobForm('${job._id}', '${job.title}', '${job.company}', '${job.location}', '${job.description}')" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Edit</button>
+                <button onclick="deleteJob('${job._id}')" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Delete</button>
+              </div>
+            `;
+            postedJobListings.appendChild(jobCard);
+          });
+        } else {
+          postedJobListings.innerHTML = '<p class="text-red-500">Failed to load jobs</p>';
+        }
+      } catch (error) {
+        postedJobListings.innerHTML = '<p class="text-red-500">Error: Unable to connect to server</p>';
+      }
+    }
+
+    // Delete Job
+    async function deleteJob(jobId) {
+      if (!confirm('Are you sure you want to delete this job?')) return;
+      try {
+        const response = await fetch(`http://localhost:5000/api/jobs/${jobId}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+        const data = await response.json();
+        if (response.ok) {
+          alert('Job deleted successfully!');
+          fetchPostedJobs();
+        } else {
+          alert(data.message || 'Failed to delete job');
+        }
+      } catch (error) {
+        alert('Error: Unable to connect to server');
+      }
+    }
+
+    // Load Profile
+    async function loadProfile() {
+      const profileContent = document.getElementById('profileContent');
+      const user = JSON.parse(localStorage.getItem('user'));
+      profileContent.innerHTML = '<p class="text-gray-700">Loading profile...</p>';
+
+      try {
+        const response = await fetch('http://localhost:5000/api/profile', {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+        const profile = await response.json();
+
+        // Update contact section
+        document.getElementById('contactName').textContent = profile.name || 'Not set';
+        document.getElementById('contactPlace').textContent = profile.place || profile.companyLocation || 'Not set';
+        document.getElementById('contactEmail').textContent = profile.contactEmail || user.email || 'Not set';
+
+        if (response.ok) {
+          if (user.role === 'jobseeker') {
+            profileContent.innerHTML = `
+              <h3 class="text-lg font-semibold mb-4">Job Seeker Profile</h3>
+              <p><strong>Name:</strong> ${profile.name || 'Not set'}</p>
+              <p><strong>Age:</strong> ${profile.age || 'Not set'}</p>
+              <p><strong>Place:</strong> ${profile.place || 'Not set'}</p>
+              <p><strong>College:</strong> ${profile.college || 'Not set'}</p>
+              <p><strong>Jobs Looking For:</strong> ${profile.jobsLookingFor?.join(', ') || 'Not set'}</p>
+              <p><strong>Resume:</strong> ${profile.resume ? `<a href="#" onclick="downloadResume()" class="text-blue-600 hover:underline">Download Resume</a>` : 'Not uploaded'}</p>
+              <form id="profileForm" class="mt-4">
+                <div class="mb-4">
+                  <label for="profileName" class="block text-gray-700">Name</label>
+                  <input
+                    type="text"
+                    id="profileName"
+                    value="${profile.name || ''}"
+                    class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    required
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="profileAge" class="block text-gray-700">Age</label>
+                  <input
+                    type="number"
+                    id="profileAge"
+                    value="${profile.age || ''}"
+                    class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    min="18"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="profilePlace" class="block text-gray-700">Place</label>
+                  <input
+                    type="text"
+                    id="profilePlace"
+                    value="${profile.place || ''}"
+                    class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="profileCollege" class="block text-gray-700">College</label>
+                  <input
+                    type="text"
+                    id="profileCollege"
+                    value="${profile.college || ''}"
+                    class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="profileJobsLookingFor" class="block text-gray-700">Jobs Looking For (comma-separated)</label>
+                  <input
+                    type="text"
+                    id="profileJobsLookingFor"
+                    value="${profile.jobsLookingFor?.join(', ') || ''}"
+                    class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="profileResume" class="block text-gray-700">Upload Resume (PDF, max 5MB)</label>
+                  <input
+                    type="file"
+                    id="profileResume"
+                    accept="application/pdf"
+                    class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
+                >
+                  Save Profile
+                </button>
+              </form>
+              <p id="profileMessage" class="mt-4 text-center text-red-500 hidden"></p>
+            `;
+          } else {
+            profileContent.innerHTML = `
+              <h3 class="text-lg font-semibold mb-4">Employer Profile</h3>
+              <p><strong>Name:</strong> ${profile.name || 'Not set'}</p>
+              <p><strong>Company Name:</strong> ${profile.companyName || 'Not set'}</p>
+              <p><strong>Company Location:</strong> ${profile.companyLocation || 'Not set'}</p>
+              <p><strong>Company Description:</strong> ${profile.companyDescription || 'Not set'}</p>
+              <p><strong>Contact Email:</strong> ${profile.contactEmail || 'Not set'}</p>
+              <p><strong>Resume:</strong> ${profile.resume ? `<a href="#" onclick="downloadResume()" class="text-blue-600 hover:underline">Download Resume</a>` : 'Not uploaded'}</p>
+              <form id="profileForm" class="mt-4">
+                <div class="mb-4">
+                  <label for="profileName" class="block text-gray-700">Name</label>
+                  <input
+                    type="text"
+                    id="profileName"
+                    value="${profile.name || ''}"
+                    class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    required
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="profileCompanyName" class="block text-gray-700">Company Name</label>
+                  <input
+                    type="text"
+                    id="profileCompanyName"
+                    value="${profile.companyName || ''}"
+                    class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="profileCompanyLocation" class="block text-gray-700">Company Location</label>
+                  <input
+                    type="text"
+                    id="profileCompanyLocation"
+                    value="${profile.companyLocation || ''}"
+                    class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="profileCompanyDescription" class="block text-gray-700">Company Description</label>
+                  <textarea
+                    id="profileCompanyDescription"
+                    class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  >${profile.companyDescription || ''}</textarea>
+                </div>
+                <div class="mb-4">
+                  <label for="profileContactEmail" class="block text-gray-700">Contact Email</label>
+                  <input
+                    type="email"
+                    id="profileContactEmail"
+                    value="${profile.contactEmail || ''}"
+                    class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="profileResume" class="block text-gray-700">Upload Resume (PDF, max 5MB)</label>
+                  <input
+                    type="file"
+                    id="profileResume"
+                    accept="application/pdf"
+                    class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
+                >
+                  Save Profile
+                </button>
+              </form>
+              <p id="profileMessage" class="mt-4 text-center text-red-500 hidden"></p>
+            `;
+          }
+
+          // Handle profile form submission
+          document.getElementById('profileForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const messageEl = document.getElementById('profileMessage');
+            const formData = new FormData();
+            formData.append('name', document.getElementById('profileName').value);
+
+            if (user.role === 'jobseeker') {
+              formData.append('age', document.getElementById('profileAge').value);
+              formData.append('place', document.getElementById('profilePlace').value);
+              formData.append('college', document.getElementById('profileCollege').value);
+              formData.append('jobsLookingFor', JSON.stringify(document.getElementById('profileJobsLookingFor').value.split(',').map(item => item.trim())));
+            } else {
+              formData.append('companyName', document.getElementById('profileCompanyName').value);
+              formData.append('companyLocation', document.getElementById('profileCompanyLocation').value);
+              formData.append('companyDescription', document.getElementById('profileCompanyDescription').value);
+              formData.append('contactEmail', document.getElementById('profileContactEmail').value);
+            }
+
+            // Handle resume upload if a file is selected
+            const resumeFile = document.getElementById('profileResume').files[0];
+            if (resumeFile) {
+              const resumeFormData = new FormData();
+              resumeFormData.append('resume', resumeFile);
+              try {
+                const resumeResponse = await fetch('http://localhost:5000/api/profile/resume', {
+                  method: 'POST',
+                  headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                  },
+                  body: resumeFormData,
+                });
+                const resumeData = await resumeResponse.json();
+                if (!resumeResponse.ok) {
+                  messageEl.classList.remove('hidden');
+                  messageEl.textContent = resumeData.message || 'Failed to upload resume';
+                  return;
+                }
+              } catch (error) {
+                messageEl.classList.remove('hidden');
+                messageEl.textContent = 'Error: Unable to upload resume';
+                return;
+              }
+            }
+
+            // Save profile data
+            try {
+              const profileResponse = await fetch('http://localhost:5000/api/profile', {
+                method: 'POST',
+                headers: {
+                  'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                },
+                body: formData,
+              });
+              const profileData = await profileResponse.json();
+              if (profileResponse.ok) {
+                messageEl.classList.remove('text-red-500', 'hidden');
+                messageEl.classList.add('text-green-500');
+                messageEl.textContent = 'Profile saved successfully!';
+                loadProfile(); // Reload profile to update display and contact section
+              } else {
+                messageEl.classList.remove('hidden');
+                messageEl.textContent = profileData.message || 'Failed to save profile';
+              }
+            } catch (error) {
+              messageEl.classList.remove('hidden');
+              messageEl.textContent = 'Error: Unable to connect to server';
+            }
+          });
+        } else {
+          // Handle case where profile doesn't exist yet
+          profileContent.innerHTML = `
+            <p class="text-gray-700">No profile found. Please create your profile below.</p>
+            ${user.role === 'jobseeker' ? `
+              <form id="profileForm" class="mt-4">
+                <div class="mb-4">
+                  <label for="profileName" class="block text-gray-700">Name</label>
+                  <input
+                    type="text"
+                    id="profileName"
+                    class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    required
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="profileAge" class="block text-gray-700">Age</label>
+                  <input
+                    type="number"
+                    id="profileAge"
+                    class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    min="18"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="profilePlace" class="block text-gray-700">Place</label>
+                  <input
+                    type="text"
+                    id="profilePlace"
+                    class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="profileCollege" class="block text-gray-700">College</label>
+                  <input
+                    type="text"
+                    id="profileCollege"
+                    class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="profileJobsLookingFor" class="block text-gray-700">Jobs Looking For (comma-separated)</label>
+                  <input
+                    type="text"
+                    id="profileJobsLookingFor"
+                    class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="profileResume" class="block text-gray-700">Upload Resume (PDF, max 5MB)</label>
+                  <input
+                    type="file"
+                    id="profileResume"
+                    accept="application/pdf"
+                    class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
+                >
+                  Save Profile
+                </button>
+              </form>
+            ` : `
+              <form id="profileForm" class="mt-4">
+                <div class="mb-4">
+                  <label for="profileName" class="block text-gray-700">Name</label>
+                  <input
+                    type="text"
+                    id="profileName"
+                    class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    required
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="profileCompanyName" class="block text-gray-700">Company Name</label>
+                  <input
+                    type="text"
+                    id="profileCompanyName"
+                    class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="profileCompanyLocation" class="block text-gray-700">Company Location</label>
+                  <input
+                    type="text"
+                    id="profileCompanyLocation"
+                    class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="profileCompanyDescription" class="block text-gray-700">Company Description</label>
+                  <textarea
+                    id="profileCompanyDescription"
+                    class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  ></textarea>
+                </div>
+                <div class="mb-4">
+                  <label for="profileContactEmail" class="block text-gray-700">Contact Email</label>
+                  <input
+                    type="email"
+                    id="profileContactEmail"
+                    class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="profileResume" class="block text-gray-700">Upload Resume (PDF, max 5MB)</label>
+                  <input
+                    type="file"
+                    id="profileResume"
+                    accept="application/pdf"
+                    class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
+                >
+                  Save Profile
+                </button>
+              </form>
+            `}
+            <p id="profileMessage" class="mt-4 text-center text-red-500 hidden"></p>
+          `;
+          // Attach event listener for new profile form
+          document.getElementById('profileForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const messageEl = document.getElementById('profileMessage');
+            const formData = new FormData();
+            formData.append('name', document.getElementById('profileName').value);
+
+            if (user.role === 'jobseeker') {
+              formData.append('age', document.getElementById('profileAge').value);
+              formData.append('place', document.getElementById('profilePlace').value);
+              formData.append('college', document.getElementById('profileCollege').value);
+              formData.append('jobsLookingFor', JSON.stringify(document.getElementById('profileJobsLookingFor').value.split(',').map(item => item.trim())));
+            } else {
+              formData.append('companyName', document.getElementById('profileCompanyName').value);
+              formData.append('companyLocation', document.getElementById('profileCompanyLocation').value);
+              formData.append('companyDescription', document.getElementById('profileCompanyDescription').value);
+              formData.append('contactEmail', document.getElementById('profileContactEmail').value);
+            }
+
+            // Handle resume upload if a file is selected
+            const resumeFile = document.getElementById('profileResume').files[0];
+            if (resumeFile) {
+              const resumeFormData = new FormData();
+              resumeFormData.append('resume', resumeFile);
+              try {
+                const resumeResponse = await fetch('http://localhost:5000/api/profile/resume', {
+                  method: 'POST',
+                  headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                  },
+                  body: resumeFormData,
+                });
+                const resumeData = await resumeResponse.json();
+                if (!resumeResponse.ok) {
+                  messageEl.classList.remove('hidden');
+                  messageEl.textContent = resumeData.message || 'Failed to upload resume';
+                  return;
+                }
+              } catch (error) {
+                messageEl.classList.remove('hidden');
+                messageEl.textContent = 'Error: Unable to upload resume';
+                return;
+              }
+            }
+
+            // Save profile data
+            try {
+              const profileResponse = await fetch('http://localhost:5000/api/profile', {
+                method: 'POST',
+                headers: {
+                  'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                },
+                body: formData,
+              });
+              const profileData = await profileResponse.json();
+              if (profileResponse.ok) {
+                messageEl.classList.remove('text-red-500', 'hidden');
+                messageEl.classList.add('text-green-500');
+                messageEl.textContent = 'Profile saved successfully!';
+                loadProfile();
+              } else {
+                messageEl.classList.remove('hidden');
+                messageEl.textContent = profileData.message || 'Failed to save profile';
+              }
+            } catch (error) {
+              messageEl.classList.remove('hidden');
+              messageEl.textContent = 'Error: Unable to connect to server';
+            }
+          });
+        }
+      } catch (error) {
+        profileContent.innerHTML = '<p class="text-red-500">Error: Unable to load profile</p>';
+      }
+    }
+
+    // Download Resume
+    async function downloadResume() {
+      try {
+        const response = await fetch('http://localhost:5000/api/profile/resume', {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+        if (response.ok) {
+          const blob = await response.blob();
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'resume.pdf';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          window.URL.revokeObjectURL(url);
+        } else {
+          const data = await response.json();
+          alert(data.message || 'Failed to download resume');
+        }
+      } catch (error) {
+        alert('Error: Unable to connect to server');
+      }
+    }
+
+    // Initialize
+    showSection('home');
+    updateNav();
+  </script>
+</body>
+</html>
